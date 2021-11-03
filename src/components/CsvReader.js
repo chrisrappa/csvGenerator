@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import Sorter from './Sorter';
+// import { compareLastName } from './Sorter';
 //Last thing to do is to export users to different tables based on Insurance Company
 
 export default function CsvReader(props){
@@ -19,37 +21,11 @@ export default function CsvReader(props){
       return eachObject;
     })
 
-    const compareLastName = ((a, b) => {
-      if(a.LastName < b.LastName){
-        return 1;
-      }
-
-      if(a.LastName > b.LastName){
-        return -1;
-      }
-
-      return 0;
-    })
-
-    const compareInsurance = ((a, b) => {
-      if(a.Insurance < b.Insurance){
-        return 1;
-      }
-
-      if(a.Insurance > b.Insurance){
-        return -1;
-      }
-
-      return 0;
-    })
-
-    const removeDupes = [...dataToArray.reduce((map, obj) => map.set(obj.UserId, obj), new Map()).values()];
-    const sortedByLastName = removeDupes.sort(compareLastName);
-    const sortedByInsurance = sortedByLastName.sort(compareInsurance);
-    setCsvArray(sortedByInsurance);
+    const sorter = Sorter(dataToArray);
+    setCsvArray(sorter);
 
   }
-  
+
   
   const submit = () => {
     const file = csvFile;
@@ -63,6 +39,7 @@ export default function CsvReader(props){
     reader.readAsText(file);
 
   }
+
 
   return(
     <form id='csv-form'>
