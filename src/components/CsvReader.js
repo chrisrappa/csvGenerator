@@ -10,7 +10,7 @@ export default function CsvReader(){
     const columns = str.slice(0, str.indexOf('\n') - 1).split(delim);
     const rows = str.slice(str.indexOf('\n' ) + 1).split('\n');
     
-    const newArray = rows.map(row => {
+    const dataToArray = rows.map(row => {
       const values = row.split(delim);
       const eachObject = columns.reduce((obj, column, i) => {
         obj[column] = values[i];
@@ -32,7 +32,7 @@ export default function CsvReader(){
       return 0;
     })
 
-    const removeDupes = [...newArray.reduce((map, obj) => map.set(obj.UserId, obj), new Map()).values()];
+    const removeDupes = [...dataToArray.reduce((map, obj) => map.set(obj.UserId, obj), new Map()).values()];
     const sortedByLastName = removeDupes.sort(compareLastName);
     setCsvArray(sortedByLastName);
 
