@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 
+//Last thing to do is to export users to different tables based on Insurance Company
 
 export default function CsvReader(){
   const [csvFile, setCsvFile] = useState('');
   const [csvArray, setCsvArray] = useState([]);
 
-  const processCSV = (str, delim=',') => {
+  const processCSV = (str, delim = ',') => {
     const columns = str.slice(0, str.indexOf('\n') - 1).split(delim);
-    const rows = str.slice(str.indexOf('\n' )).split('\n');
+    const rows = str.slice(str.indexOf('\n' ) + 1).split('\n');
     
     const newArray = rows.map(row => {
       const values = row.split(delim);
@@ -52,24 +53,26 @@ export default function CsvReader(){
 
   return(
     <form id='csv-form'>
-      <input
-        type='file'
-        accept='.csv'
-        id='csvFile'
-        onChange={(e) => (
-          setCsvFile(e.target.files[0])
-        )}
-      >
-      </input>
-      <br />
-      <button
-        onClick = {(e) => {
-          e.preventDefault();
-          if(csvFile){submit()};
-        }}
-      >
-        submit
-      </button>
+      <div className = 'inputSubmit'>
+        <input
+          type='file'
+          accept='.csv'
+          id='csvFile'
+          onChange={(e) => (
+            setCsvFile(e.target.files[0])
+          )}
+        >
+        </input>
+        <br />
+        <button
+          onClick = {(e) => {
+            e.preventDefault();
+            if(csvFile){submit()};
+          }}
+        >
+          submit
+        </button>
+      </div>
       { csvArray.length > 0 ? 
       
       <>
