@@ -2,6 +2,7 @@
 export default function Sorter(props){
 
   const csvArray = props;
+  
   const compareLastName = ((a, b) => {
     if(a.LastName < b.LastName){
       return 1;
