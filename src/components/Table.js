@@ -1,13 +1,15 @@
+import ErrorMessage from "./ErrorMessage";
 
 
 export default function Table(props) {
 
   const csvArray = props.csvArray;
+  console.log(csvArray);
 
   return (
     <form id='csv-form'>
       
-      { csvArray.length > 0 ? 
+      { csvArray.length > 4 ? 
       
       <>
         <table>
@@ -36,7 +38,9 @@ export default function Table(props) {
         </table>
       </>
       
-      : null }
+      :  
+        <ErrorMessage />
+      }
 
     </form>
   )
