@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { processCSV } from '../src/components/CsvReader';
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -12,6 +11,7 @@ function App() {
 
   const [csvFile, setCsvFile] = useState('');
   const [csvArray, setCsvArray] = useState({});
+  const [filterType, setFilterType] = useState('');
 
   const submit = () => {
     const file = csvFile;
@@ -19,14 +19,24 @@ function App() {
 
     reader.onload = function(e) {
       const text = e.target.result;
-      const processed = processCSV(text);
-      setCsvArray(processed);
+      const processedObjects = processCSV(text);
+      if(filterType !== ''){
+
+        const filtered = processedObjects.filter(processedObject => processedObject.Insurance.includes(filterType));
+        setCsvArray(filtered);
+
+      } else {setCsvArray(processedObjects)};
+      
     }
       
     reader.readAsText(file);
 
   }
 
+  const handleChange = (e) => {
+    e.preventDefault();
+    setFilterType(e.target.value);
+  }
 
   return (
     <div className = 'main'>
@@ -37,9 +47,9 @@ function App() {
           id="filterByInsurance"
           value={csvArray.Insurance}
           label="Filter by Insurance Company"
-          // onChange={handleChange}
+          onChange={handleChange}
         >
-          <MenuItem value='United HealthCare'>United HealthCare</MenuItem>
+          <MenuItem value='United Health Care'>United HealthCare</MenuItem>
           <MenuItem value='Progressive'>Progressive</MenuItem>
           <MenuItem value='Blue Cross'>Blue Cross</MenuItem>
         </Select>
