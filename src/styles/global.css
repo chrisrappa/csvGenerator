@@ -31,6 +31,7 @@ td {
 input{
   border: 1px solid rgba(194, 194, 194, 0.438);
   padding: .5rem;
+  border-radius: 0.25rem;
 }
 
 button{
@@ -38,7 +39,8 @@ button{
   padding: .5rem;
   padding-right: 1rem;
   padding-left: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   font-family: Montserrat;
   font-weight: 500;
 }
+

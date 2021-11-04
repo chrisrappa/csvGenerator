@@ -40,20 +40,6 @@ function App() {
 
   return (
     <div className = 'main'>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Filter By Insurance</InputLabel>
-        <Select
-          labelId="filterByInsurance"
-          id="filterByInsurance"
-          value={csvArray.Insurance}
-          label="Filter by Insurance Company"
-          onChange={handleChange}
-        >
-          <MenuItem value='United Health Care'>United HealthCare</MenuItem>
-          <MenuItem value='Progressive'>Progressive</MenuItem>
-          <MenuItem value='Blue Cross'>Blue Cross</MenuItem>
-        </Select>
-      </FormControl>
       <div className = 'inputSubmit'>
         <input
           type='file'
@@ -65,6 +51,20 @@ function App() {
         >
         </input>
         <br />
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Filter By Insurance</InputLabel>
+          <Select
+            labelId="filterByInsurance"
+            id="filterByInsurance"
+            value={csvArray.Insurance}
+            label="Filter by Insurance Company"
+            onChange={handleChange}
+          >
+            <MenuItem value='United Health Care'>United HealthCare</MenuItem>
+            <MenuItem value='Progressive'>Progressive</MenuItem>
+            <MenuItem value='Blue Cross'>Blue Cross</MenuItem>
+          </Select>
+        </FormControl>
         <button
           onClick = {(e) => {
             e.preventDefault();
