@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Table from "./components/Table";
 import './styles/global.css';
+import downloadCsvConverter from "./components/downloadCsvConverter";
 
 function App() {
 
@@ -38,6 +39,11 @@ function App() {
     setFilterType(e.target.value);
   }
 
+  const downloadCsv = () => {
+    var encodedUri = encodeURI(downloadCsvConverter(csvArray));
+    window.open(encodedUri);
+  }
+
   return (
     <div className = 'main'>
       <div className = 'inputSubmit'>
@@ -60,6 +66,7 @@ function App() {
             label="Filter by Insurance Company"
             onChange={handleChange}
           >
+            <MenuItem value=''>All</MenuItem>
             <MenuItem value='United Health Care'>United HealthCare</MenuItem>
             <MenuItem value='Progressive'>Progressive</MenuItem>
             <MenuItem value='Blue Cross'>Blue Cross</MenuItem>
@@ -75,6 +82,14 @@ function App() {
         </button>
       </div>
       <Table csvArray = {csvArray}/>
+      <button
+          onClick = {(e) => {
+            e.preventDefault();
+            if(csvFile){downloadCsv()};
+          }}
+        >
+          Download CSV
+        </button>
     </div>
   );
 
