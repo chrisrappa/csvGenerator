@@ -1,6 +1,6 @@
 import ErrorMessage from "./ErrorMessage";
 
-
+// Take in object array props, map, then display
 export default function Table(props) {
 
   const csvArray = props.csvArray;
@@ -18,7 +18,7 @@ export default function Table(props) {
               <th>First Name</th>
               <th>Last Name</th>
               <th>Version</th>
-              <th>Insurance Company</th>
+              <th>Insurance</th>
             </tr>
           </thead>
           <tbody>

@@ -44,3 +44,8 @@ button{
   font-weight: 500;
 }
 
+.download{
+  align-self: center;
+  max-width: 10rem;
+  margin: 2.5rem;
+}

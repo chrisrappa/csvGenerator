@@ -14,19 +14,29 @@ function App() {
   const [csvArray, setCsvArray] = useState({});
   const [filterType, setFilterType] = useState('');
 
+
   const submit = () => {
+
+    // Gets csvFile and converts it to text format, then creates array of objects from it
+    // Uses CsvReader component to process, Sorter.js to sort by name/insurance && remove dupes
     const file = csvFile;
     const reader = new FileReader();
 
     reader.onload = function(e) {
       const text = e.target.result;
       const processedObjects = processCSV(text);
+
+      //If filterType state isn't empty, apply the filter to the data
       if(filterType !== ''){
 
         const filtered = processedObjects.filter(processedObject => processedObject.Insurance.includes(filterType));
         setCsvArray(filtered);
 
-      } else {setCsvArray(processedObjects)};
+      } else {
+
+        //No filter then set to processed data
+        setCsvArray(processedObjects)
+      };
       
     }
       
@@ -34,11 +44,13 @@ function App() {
 
   }
 
+  //Set filterType to user selection
   const handleChange = (e) => {
     e.preventDefault();
     setFilterType(e.target.value);
   }
 
+  //Use downloadCsvConverter to download filtered and processed CSV
   const downloadCsv = () => {
     var encodedUri = encodeURI(downloadCsvConverter(csvArray));
     window.open(encodedUri);
@@ -57,6 +69,7 @@ function App() {
         >
         </input>
         <br />
+        {/* Material UI dropdown menu, sets filter state */}
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Filter By Insurance</InputLabel>
           <Select
@@ -81,12 +94,17 @@ function App() {
           submit
         </button>
       </div>
+
+      {/* Takes in state of csvArray so that you can swap out different tables */}
       <Table csvArray = {csvArray}/>
+
+      {/* Download csv button */}
       <button
-          onClick = {(e) => {
-            e.preventDefault();
-            if(csvFile){downloadCsv()};
-          }}
+        className = "download"
+        onClick = {(e) => {
+          e.preventDefault();
+          if(csvFile){downloadCsv()};
+        }}
         >
           Download CSV
         </button>

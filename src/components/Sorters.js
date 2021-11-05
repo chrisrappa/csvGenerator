@@ -27,7 +27,10 @@ export default function Sorter(props){
     return 0;
   })
   
+  // Remove duplicates using .reduce method and creating new Map with filtered objects 
   const removeDupes = [...csvArray.reduce((map, obj) => map.set(obj.UserId, obj), new Map()).values()];
+
+  // Sort by last name then insurance company using algorythems above
   const sortedByLastName = removeDupes.sort(compareLastName);
   const sortedByInsurance = sortedByLastName.sort(compareInsurance);
 
